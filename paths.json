@@ -1,11 +1,11 @@
 {
   "mappings": [
-    "/content/kddi/index:/",
-    "/content/kddi/:/",
-    "/content/kddi/configuration:/.helix/config.json",
-    "/content/kddi/metadata:/metadata.json"
+    "/content/kddibiz/index:/",
+    "/content/kddibiz/:/",
+    "/content/kddibiz/configuration:/.helix/config.json",
+    "/content/kddibiz/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/kddi/"
+    "/content/kddibiz/"
   ]
 }
