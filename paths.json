@@ -1,5 +1,6 @@
 {
   "mappings": [
+    "/content/kddi/index:/",
     "/content/kddi/:/",
     "/content/kddi/configuration:/.helix/config.json",
     "/content/kddi/metadata:/metadata.json"
