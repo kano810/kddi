@@ -1,6 +1,6 @@
 {
   "mappings": [
-    "/content/kddibiz/:/",
+    "/content/kddibiz/index/:/",
     "/content/kddibiz/:/",
     "/content/kddibiz/configuration:/.helix/config.json",
     "/content/kddibiz/metadata:/metadata.json"
