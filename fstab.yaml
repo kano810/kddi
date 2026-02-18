@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p160210-e1936769.adobeaemcloud.com/bin/franklin.delivery/kano810/kddi/main"
+    url: "https://author-p160210-e1936747.adobeaemcloud.com/bin/franklin.delivery/kano810/kddi/main"
     type: "markup"
     suffix: ".html"
