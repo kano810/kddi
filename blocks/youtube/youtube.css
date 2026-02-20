@@ -1,6 +1,7 @@
 .youtube {
   margin: 0 auto;
   max-width: 800px;
+  min-height: 120px; /* ensure block is selectable in Universal Editor */
 }
 
 .youtube .youtube-embed-wrapper {

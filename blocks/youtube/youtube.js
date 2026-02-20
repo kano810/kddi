@@ -24,10 +24,23 @@ function getYouTubeVideoId(url) {
 }
 
 /**
+ * Ensures Universal Editor can select the block by moving instrumentation to the block element.
+ * @param {Element} block The youtube block element
+ */
+function preserveBlockInstrumentation(block) {
+  const source = block.querySelector('[data-aue-resource]');
+  if (source && source !== block) {
+    moveInstrumentation(source, block);
+  }
+}
+
+/**
  * Decorates the YouTube block: reads URL from first cell and renders iframe embed.
  * @param {Element} block The youtube block element
  */
 export default function decorate(block) {
+  preserveBlockInstrumentation(block);
+
   const firstCell = block.querySelector('div');
   const link = block.querySelector('a');
   const url = link ? link.getAttribute('href') : (firstCell?.textContent?.trim() || '');
