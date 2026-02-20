@@ -161,6 +161,18 @@
     ]
   },
   {
+    "id": "cf",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "path",
+        "label": "CFパスまたはURL",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {

@@ -1,0 +1,45 @@
+.cf {
+  margin: 0 auto;
+  max-width: 800px;
+  min-height: 80px;
+}
+
+.cf .cf-content {
+  padding: 1rem 0;
+}
+
+.cf .cf-data {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1.5rem;
+  align-items: baseline;
+}
+
+.cf .cf-data-key {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-color, #333);
+}
+
+.cf .cf-data-value {
+  margin: 0;
+  color: var(--text-color, #555);
+}
+
+.cf .cf-data-value a {
+  color: var(--link-color, #0066cc);
+}
+
+.cf.cf-empty,
+.cf.cf-error {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-color, #666);
+  background-color: var(--background-color, #f5f5f5);
+}
+
+.cf.cf-empty p,
+.cf.cf-error p {
+  margin: 0;
+}
