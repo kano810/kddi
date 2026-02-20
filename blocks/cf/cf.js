@@ -43,14 +43,12 @@ function renderValue(value) {
 function getCfJsonUrl(productIdOrPath) {
   const raw = (productIdOrPath || '').trim();
   if (!raw) return null;
-  if (raw.startsWith('http://') || raw.startsWith('https://')) {
-    const u = raw.replace(/(\.plain)?\.html(\.model\.json)?(\?.*)?$/i, '');
-    return u.endsWith('.model.json') ? u : `${u}.model.json`;
-  }
-  // Strip .html /.plain.html and trailing slash, then append .model.json
-  const path = raw
-    .replace(/(\.plain)?\.html(\.model\.json)?\/?$/i, '')
-    .replace(/(\.model\.json)?\/?$/, '');
+  // Strip query string and hash for path building
+  let path = raw.split('?')[0].split('#')[0].replace(/\/+$/, '');
+  // Remove .model.json if already present
+  if (path.endsWith('.model.json')) return path;
+  if (path.toLowerCase().endsWith('.html')) path = path.slice(0, -5);
+  else if (path.toLowerCase().endsWith('.plain.html')) path = path.slice(0, -11);
   return `${path}.model.json`;
 }
 
