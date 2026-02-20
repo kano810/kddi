@@ -50,11 +50,11 @@ function getCfJsonUrl(productIdOrPath) {
   if (path.toLowerCase().endsWith('.html')) path = path.slice(0, -5);
   else if (path.toLowerCase().endsWith('.plain.html')) path = path.slice(0, -11);
 
-  // DAM Content Fragments: .model.json is invalid; use Assets API /api/assets/{path}.json
+  // DAM Content Fragments: .model.json is invalid; use Assets API /api/assets/{path}.json (at origin root)
   const damPrefix = '/content/dam/';
   if (path.startsWith(damPrefix) || path.includes('/content/dam/')) {
-    const damPath = path.replace(/^.*\/content\/dam\//i, '');
-    if (damPath) return `/api/assets/${damPath.replace(/\.model\.json$/i, '')}.json`;
+    const damPath = path.replace(/^.*\/content\/dam\//i, '').replace(/\.model\.json$/i, '');
+    if (damPath) return `/api/assets/${damPath}.json`;
   }
   // Full URL to DAM (e.g. https://author.xxx/content/dam/...)
   try {
@@ -151,10 +151,12 @@ export default async function decorate(block) {
   const link = block.querySelector('a');
   const productID = link ? link.getAttribute('href') : (firstCell?.textContent?.trim() || '');
   const url = getCfJsonUrl(productID);
+  // Always use absolute URL so fetch is not affected by <base href>
+  const absoluteUrl = url?.startsWith('http') ? url : (url ? new URL(url, window.location.origin).href : null);
 
   block.textContent = '';
 
-  if (!url) {
+  if (!absoluteUrl) {
     block.classList.add('cf-empty');
     const msg = document.createElement('p');
     msg.textContent = 'productID（またはCFパス・URL）を入力してください';
@@ -162,7 +164,7 @@ export default async function decorate(block) {
     return;
   }
 
-  const result = await fetchCfData(url);
+  const result = await fetchCfData(absoluteUrl);
   const data = result.data;
 
   if (!data || Object.keys(data).length === 0) {
@@ -176,7 +178,7 @@ export default async function decorate(block) {
     if (result.error) block.appendChild(detail);
     const urlHint = document.createElement('p');
     urlHint.className = 'cf-error-url';
-    urlHint.textContent = `URL: ${url.startsWith('http') ? url : new URL(url, window.location.origin).href}`;
+    urlHint.textContent = `URL: ${absoluteUrl}`;
     block.appendChild(urlHint);
     return;
   }
