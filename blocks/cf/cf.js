@@ -36,6 +36,17 @@ function renderValue(value) {
 }
 
 /**
+ * Returns the origin to use for CF API requests (Assets API).
+ * Uses meta[name="cf-api-origin"] if set, otherwise window.location.origin.
+ * @returns {string}
+ */
+function getCfApiOrigin() {
+  const meta = document.querySelector('meta[name="cf-api-origin"]');
+  if (meta?.content?.trim()) return meta.content.trim().replace(/\/+$/, '');
+  return window.location.origin;
+}
+
+/**
  * Builds the CF JSON URL from productID, path, or full URL.
  * - DAM path (/content/dam/...) → Assets API: /api/assets/{path}.json (no .model selector)
  * - Page path or other → .model.json
@@ -151,8 +162,9 @@ export default async function decorate(block) {
   const link = block.querySelector('a');
   const productID = link ? link.getAttribute('href') : (firstCell?.textContent?.trim() || '');
   const url = getCfJsonUrl(productID);
-  // Always use absolute URL so fetch is not affected by <base href>
-  const absoluteUrl = url?.startsWith('http') ? url : (url ? new URL(url, window.location.origin).href : null);
+  // Always use absolute URL; use cf-api-origin for DAM paths when set (e.g. AEM author URL)
+  const baseOrigin = getCfApiOrigin();
+  const absoluteUrl = url?.startsWith('http') ? url : (url ? new URL(url, baseOrigin).href : null);
 
   block.textContent = '';
 
