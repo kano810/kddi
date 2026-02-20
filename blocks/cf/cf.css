@@ -43,3 +43,17 @@
 .cf.cf-error p {
   margin: 0;
 }
+
+.cf .cf-error-detail {
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  color: var(--text-color, #888);
+}
+
+.cf .cf-error-url {
+  margin-top: 0.5rem;
+  font-size: 0.8em;
+  word-break: break-all;
+  font-family: monospace;
+  color: var(--text-color, #999);
+}
