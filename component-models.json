@@ -164,11 +164,11 @@
     "id": "cf",
     "fields": [
       {
-        "component": "text",
+        "component": "reference",
         "valueType": "string",
         "name": "path",
-        "label": "CFパスまたはURL",
-        "value": ""
+        "label": "CF",
+        "multi": false
       }
     ]
   },
