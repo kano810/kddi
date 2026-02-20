@@ -21,11 +21,9 @@
       "id": "cf",
       "fields": [
         {
-          "component": "reference",
-          "valueType": "string",
+          "component": "aem-content",
           "name": "path",
-          "label": "CF",
-          "multi": false
+          "label": "CF"
         }
       ]
     }
