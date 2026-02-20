@@ -1,0 +1,34 @@
+{
+  "definitions": [
+    {
+      "title": "YouTube",
+      "id": "youtube",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "YouTube",
+              "model": "youtube"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "youtube",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "url",
+          "label": "YouTube URL",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
