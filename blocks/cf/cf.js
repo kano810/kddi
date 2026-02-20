@@ -36,12 +36,12 @@ function renderValue(value) {
 }
 
 /**
- * Builds the CF JSON URL from path or raw URL.
- * @param {string} pathOrUrl Path (e.g. /content/fragments/xxx) or full URL
+ * Builds the CF JSON URL from productID, path, or full URL.
+ * @param {string} productIdOrPath productID, path (e.g. /content/fragments/xxx), or full URL
  * @returns {string} URL to fetch
  */
-function getCfJsonUrl(pathOrUrl) {
-  const raw = (pathOrUrl || '').trim();
+function getCfJsonUrl(productIdOrPath) {
+  const raw = (productIdOrPath || '').trim();
   if (!raw) return null;
   if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
   const path = raw.replace(/(\.model\.json)?\/?$/, '');
@@ -105,7 +105,7 @@ function renderCfData(container, data) {
 }
 
 /**
- * Decorates the CF block: reads path/URL from first cell, fetches JSON, displays data.
+ * Decorates the CF block: reads productID (or path/URL) from first cell, fetches JSON, displays data.
  * @param {Element} block The cf block element
  */
 export default async function decorate(block) {
@@ -113,15 +113,15 @@ export default async function decorate(block) {
 
   const firstCell = block.querySelector('div');
   const link = block.querySelector('a');
-  const pathOrUrl = link ? link.getAttribute('href') : (firstCell?.textContent?.trim() || '');
-  const url = getCfJsonUrl(pathOrUrl);
+  const productID = link ? link.getAttribute('href') : (firstCell?.textContent?.trim() || '');
+  const url = getCfJsonUrl(productID);
 
   block.textContent = '';
 
   if (!url) {
     block.classList.add('cf-empty');
     const msg = document.createElement('p');
-    msg.textContent = 'CFのパスまたはURLを入力してください（例: /content/fragments/xxx）';
+    msg.textContent = 'productID（またはCFパス・URL）を入力してください';
     block.appendChild(msg);
     return;
   }
@@ -131,7 +131,7 @@ export default async function decorate(block) {
   if (!data || Object.keys(data).length === 0) {
     block.classList.add('cf-error');
     const msg = document.createElement('p');
-    msg.textContent = 'CFデータを取得できませんでした。パスまたはURLを確認してください。';
+    msg.textContent = 'CFデータを取得できませんでした。productIDを確認してください。';
     block.appendChild(msg);
     return;
   }

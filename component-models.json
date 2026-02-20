@@ -165,7 +165,7 @@
     "fields": [
       {
         "component": "aem-content",
-        "name": "path",
+        "name": "productID",
         "label": "CF"
       }
     ]
