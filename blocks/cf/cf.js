@@ -43,29 +43,44 @@ function renderValue(value) {
 function getCfJsonUrl(productIdOrPath) {
   const raw = (productIdOrPath || '').trim();
   if (!raw) return null;
-  if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
-  const path = raw.replace(/(\.model\.json)?\/?$/, '');
+  if (raw.startsWith('http://') || raw.startsWith('https://')) {
+    const u = raw.replace(/(\.plain)?\.html(\.model\.json)?(\?.*)?$/i, '');
+    return u.endsWith('.model.json') ? u : `${u}.model.json`;
+  }
+  // Strip .html /.plain.html and trailing slash, then append .model.json
+  const path = raw
+    .replace(/(\.plain)?\.html(\.model\.json)?\/?$/i, '')
+    .replace(/(\.model\.json)?\/?$/, '');
   return `${path}.model.json`;
 }
 
 /**
  * Fetches JSON and returns the fragment data (handles AEM-style wrapper if present).
  * @param {string} url URL to fetch
- * @returns {Promise<object|null>} Fragment data or null
+ * @returns {Promise<{ data: object|null, error?: string }>} Fragment data and optional error message
  */
 async function fetchCfData(url) {
+  const resolvedUrl = url.startsWith('http') ? url : new URL(url, window.location.origin).href;
   try {
-    const resp = await fetch(url);
-    if (!resp.ok) return null;
+    const resp = await fetch(resolvedUrl);
+    if (!resp.ok) {
+      const err = `HTTP ${resp.status} (${resolvedUrl})`;
+      // eslint-disable-next-line no-console
+      console.warn('CF block:', err);
+      return { data: null, error: err };
+    }
     const data = await resp.json();
     if (data && typeof data === 'object') {
-      if (data.model) return data.model;
-      if (data.elements) return data.elements;
-      return data;
+      const payload = data.model ?? data.elements ?? data;
+      const obj = typeof payload === 'object' && payload !== null ? payload : data;
+      if (Object.keys(obj).length > 0) return { data: obj };
     }
-    return null;
-  } catch {
-    return null;
+    return { data: null, error: 'レスポンスが空です' };
+  } catch (e) {
+    const err = e?.message || String(e);
+    // eslint-disable-next-line no-console
+    console.warn('CF block fetch failed:', resolvedUrl, err);
+    return { data: null, error: `取得エラー: ${err}` };
   }
 }
 
@@ -126,13 +141,22 @@ export default async function decorate(block) {
     return;
   }
 
-  const data = await fetchCfData(url);
+  const result = await fetchCfData(url);
+  const data = result.data;
 
   if (!data || Object.keys(data).length === 0) {
     block.classList.add('cf-error');
     const msg = document.createElement('p');
     msg.textContent = 'CFデータを取得できませんでした。productIDを確認してください。';
     block.appendChild(msg);
+    const detail = document.createElement('p');
+    detail.className = 'cf-error-detail';
+    detail.textContent = result.error ? `（${result.error}）` : '';
+    if (result.error) block.appendChild(detail);
+    const urlHint = document.createElement('p');
+    urlHint.className = 'cf-error-url';
+    urlHint.textContent = `URL: ${url.startsWith('http') ? url : new URL(url, window.location.origin).href}`;
+    block.appendChild(urlHint);
     return;
   }
 
