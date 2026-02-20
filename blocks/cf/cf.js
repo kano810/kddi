@@ -37,19 +37,41 @@ function renderValue(value) {
 
 /**
  * Builds the CF JSON URL from productID, path, or full URL.
- * @param {string} productIdOrPath productID, path (e.g. /content/fragments/xxx), or full URL
+ * - DAM path (/content/dam/...) → Assets API: /api/assets/{path}.json (no .model selector)
+ * - Page path or other → .model.json
+ * @param {string} productIdOrPath productID, path (e.g. /content/dam/.../123), or full URL
  * @returns {string} URL to fetch
  */
 function getCfJsonUrl(productIdOrPath) {
   const raw = (productIdOrPath || '').trim();
   if (!raw) return null;
-  // Strip query string and hash for path building
+  // Strip query string and hash
   let path = raw.split('?')[0].split('#')[0].replace(/\/+$/, '');
-  // Remove .model.json if already present
-  if (path.endsWith('.model.json')) return path;
   if (path.toLowerCase().endsWith('.html')) path = path.slice(0, -5);
   else if (path.toLowerCase().endsWith('.plain.html')) path = path.slice(0, -11);
-  return `${path}.model.json`;
+
+  // DAM Content Fragments: .model.json is invalid; use Assets API /api/assets/{path}.json
+  const damPrefix = '/content/dam/';
+  if (path.startsWith(damPrefix) || path.includes('/content/dam/')) {
+    const damPath = path.replace(/^.*\/content\/dam\//i, '');
+    if (damPath) return `/api/assets/${damPath.replace(/\.model\.json$/i, '')}.json`;
+  }
+  // Full URL to DAM (e.g. https://author.xxx/content/dam/...)
+  try {
+    const u = new URL(path);
+    if (u.pathname.includes('/content/dam/')) {
+      const damPath = u.pathname.replace(/^.*\/content\/dam\//i, '').replace(/\.model\.json$/i, '');
+      u.pathname = `/api/assets/${damPath}.json`;
+      u.search = '';
+      u.hash = '';
+      return u.href;
+    }
+  } catch {
+    // not a full URL, ignore
+  }
+
+  if (path.endsWith('.model.json')) return path;
+  return `${path.replace(/\.model\.json$/i, '')}.model.json`;
 }
 
 /**
@@ -69,7 +91,8 @@ async function fetchCfData(url) {
     }
     const data = await resp.json();
     if (data && typeof data === 'object') {
-      const payload = data.model ?? data.elements ?? data;
+      // Assets API (SIREN): CF data is in properties
+      const payload = data.properties ?? data.model ?? data.elements ?? data;
       const obj = typeof payload === 'object' && payload !== null ? payload : data;
       if (Object.keys(obj).length > 0) return { data: obj };
     }
