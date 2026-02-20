@@ -1,1 +1,3 @@
+# Ensure node is in PATH when run from GUI (e.g. GitHub Desktop)
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 node .husky/pre-commit.mjs
