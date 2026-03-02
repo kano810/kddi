@@ -1,0 +1,51 @@
+{
+  "article-cf-list": {
+    "title": "Article CF List（記事一覧）",
+    "description": "記事API (/bin/articleindex.json) で取得したコンテンツフラグメント（記事）一覧を表示します。",
+    "properties": {
+      "api-origin": {
+        "title": "API オリジン",
+        "description": "AEM のベースURL（EDS から別ドメインの AEM を呼ぶ場合に指定）",
+        "type": "string"
+      },
+      "ck-lang": {
+        "title": "言語",
+        "description": "ck_lang（例: ja, en）",
+        "type": "string"
+      },
+      "ck-limit": {
+        "title": "表示件数",
+        "description": "ck_limit（最大1000）",
+        "type": "number",
+        "default": 10
+      },
+      "ck-offset": {
+        "title": "オフセット",
+        "description": "ck_offset",
+        "type": "number"
+      },
+      "ck-article-site": {
+        "title": "サイト",
+        "description": "ck_article-site",
+        "type": "string"
+      },
+      "ck-industry": {
+        "title": "業種フィルタ",
+        "description": "ck_industry（カンマ区切り）",
+        "type": "string"
+      },
+      "ck-category": {
+        "title": "カテゴリフィルタ",
+        "description": "ck_category（カンマ区切り）",
+        "type": "string"
+      },
+      "layout": {
+        "title": "レイアウト",
+        "description": "cards または list",
+        "type": "string",
+        "enum": ["cards", "list"],
+        "default": "cards"
+      }
+    }
+  }
+}
