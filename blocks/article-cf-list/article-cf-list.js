@@ -28,7 +28,7 @@
  */
 
 /** デフォルトの API オリジン（未指定時）。空なら同一オリジン。data-api-origin で上書き可能 */
-const DEFAULT_API_ORIGIN = 'https://biz.kddi.com';
+const DEFAULT_API_ORIGIN = 'http://57.182.194.189:4503';
 /** デフォルトの API パス（未指定時）。data-api-path で上書き可能 */
 const DEFAULT_API_PATH = '/bin/kddi-com/casestudyindex.json';
 
