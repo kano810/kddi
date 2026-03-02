@@ -1,11 +1,16 @@
 {
   "article-cf-list": {
-    "title": "Article CF List（記事一覧）",
-    "description": "記事API (/bin/articleindex.json) で取得したコンテンツフラグメント（記事）一覧を表示します。",
+    "title": "Article CF List（記事・事例一覧）",
+    "description": "記事API または 事例API で取得した一覧を表示します。API オリジン・パスを指定しない場合は同一オリジンの記事APIを使用します。",
     "properties": {
       "api-origin": {
-        "title": "API オリジン",
-        "description": "AEM のベースURL（EDS から別ドメインの AEM を呼ぶ場合に指定）",
+        "title": "API オリジン（ドメイン）",
+        "description": "AEM のベース URL。未指定時は同一オリジン。事例API利用時は例: https://biz.kddi.com",
+        "type": "string"
+      },
+      "api-path": {
+        "title": "API パス",
+        "description": "API のパス。未指定時は /bin/articleindex.json。事例APIは /bin/kddi-com/casestudyindex.json",
         "type": "string"
       },
       "ck-lang": {
@@ -15,7 +20,7 @@
       },
       "ck-limit": {
         "title": "表示件数",
-        "description": "ck_limit（最大1000）",
+        "description": "ck_limit（最大 1000）",
         "type": "number",
         "default": 10
       },
@@ -25,8 +30,13 @@
         "type": "number"
       },
       "ck-article-site": {
-        "title": "サイト",
+        "title": "サイト（記事API）",
         "description": "ck_article-site",
+        "type": "string"
+      },
+      "ck-root-path": {
+        "title": "ルートパス（事例API）",
+        "description": "ck_rootPath。事例API利用時は例: /content/kddi-com/usecase",
         "type": "string"
       },
       "ck-industry": {
@@ -41,7 +51,7 @@
       },
       "layout": {
         "title": "レイアウト",
-        "description": "cards または list",
+        "description": "表示形式",
         "type": "string",
         "enum": ["cards", "list"],
         "default": "cards"
