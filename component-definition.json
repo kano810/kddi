@@ -83,7 +83,7 @@
       "id": "blocks",
       "components": [
         {
-          "title": "Article CF List",
+          "title": "Article CF List（記事・事例一覧）",
           "id": "article-cf-list",
           "plugins": {
             "xwalk": {

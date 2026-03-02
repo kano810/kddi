@@ -148,7 +148,14 @@
         "component": "text",
         "valueType": "string",
         "name": "api-origin",
-        "label": "API オリジン",
+        "label": "API オリジン（ドメイン）",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "api-path",
+        "label": "API パス",
         "value": ""
       },
       {
@@ -176,7 +183,14 @@
         "component": "text",
         "valueType": "string",
         "name": "ck-article-site",
-        "label": "サイト",
+        "label": "サイト（記事API）",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ck-root-path",
+        "label": "ルートパス（事例API）",
         "value": ""
       },
       {
