@@ -27,8 +27,21 @@
  *   data-ck-lang="ja" data-ck-root-path="/content/kddi-com/usecase" data-ck-limit="10"
  */
 
-/** 記事APIのデフォルトパス。data-api-path で上書き可能 */
-const ARTICLE_INDEX_PATH = '/bin/articleindex.json';
+/** デフォルトの API オリジン（未指定時）。空なら同一オリジン。data-api-origin で上書き可能 */
+const DEFAULT_API_ORIGIN = 'https://biz.kddi.com';
+/** デフォルトの API パス（未指定時）。data-api-path で上書き可能 */
+const DEFAULT_API_PATH = '/bin/kddi-com/casestudyindex.json';
+
+/** デフォルトの API クエリパラメータ（未指定時に使用）。data-ck-* で上書き可能 */
+const DEFAULT_API_PARAMS = {
+  'ck_article-site': '',
+  ck_lang: 'ja',
+  ck_offset: '',
+  ck_limit: '10',
+  ck_industry: '',
+  ck_category: '',
+  ck_rootPath: '/content/kddi-com/usecase',
+};
 
 /**
  * ブロックの data 属性から API クエリパラメータを組み立てる
@@ -37,14 +50,14 @@ const ARTICLE_INDEX_PATH = '/bin/articleindex.json';
  */
 function getApiParams(block) {
   const params = new URLSearchParams();
-  const origin = block.dataset.apiOrigin || '';
-  const site = block.dataset.ckArticleSite;
-  const lang = block.dataset.ckLang;
-  const offset = block.dataset.ckOffset;
-  const limit = block.dataset.ckLimit;
-  const industry = block.dataset.ckIndustry;
-  const category = block.dataset.ckCategory;
-  const rootPath = block.dataset.ckRootPath;
+  const origin = block.dataset.apiOrigin ?? DEFAULT_API_ORIGIN;
+  const site = block.dataset.ckArticleSite ?? DEFAULT_API_PARAMS['ck_article-site'];
+  const lang = block.dataset.ckLang ?? DEFAULT_API_PARAMS.ck_lang;
+  const offset = block.dataset.ckOffset ?? DEFAULT_API_PARAMS.ck_offset;
+  const limit = block.dataset.ckLimit ?? DEFAULT_API_PARAMS.ck_limit;
+  const industry = block.dataset.ckIndustry ?? DEFAULT_API_PARAMS.ck_industry;
+  const category = block.dataset.ckCategory ?? DEFAULT_API_PARAMS.ck_category;
+  const rootPath = block.dataset.ckRootPath ?? DEFAULT_API_PARAMS.ck_rootPath;
 
   if (site) params.set('ck_article-site', site);
   if (lang) params.set('ck_lang', lang);
@@ -64,7 +77,7 @@ function getApiParams(block) {
  */
 function getArticleIndexUrl(block) {
   const { params, origin } = getApiParams(block);
-  let path = (block.dataset.apiPath || ARTICLE_INDEX_PATH).trim();
+  let path = (block.dataset.apiPath ?? DEFAULT_API_PATH).trim();
   if (!path.startsWith('/')) path = `/${path}`;
   const base = origin ? origin.replace(/\/$/, '') : '';
   const query = params.toString();
@@ -79,7 +92,10 @@ function getArticleIndexUrl(block) {
 async function fetchArticleList(url) {
   const res = await fetch(url, { credentials: 'same-origin' });
   if (!res.ok) {
-    throw new Error(`API error: ${res.status} ${res.statusText}`);
+    const msg = res.status === 404
+      ? `API が見つかりません (404)。data-api-origin と data-api-path を確認してください。例: 事例APIは data-api-origin="https://biz.kddi.com" data-api-path="/bin/kddi-com/casestudyindex.json"`
+      : `API error: ${res.status} ${res.statusText}`;
+    throw new Error(msg);
   }
   return res.json();
 }
