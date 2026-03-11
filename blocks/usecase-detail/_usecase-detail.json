@@ -1,0 +1,33 @@
+{
+  "definitions": [
+    {
+      "title": "Usecase Detail",
+      "id": "usecase-detail",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Usecase Detail",
+              "model": "usecase-detail"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "usecase-detail",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "content",
+          "label": "Content",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

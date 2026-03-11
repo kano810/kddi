@@ -301,6 +301,17 @@
     ]
   },
   {
+    "id": "usecase-detail",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Content",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "youtube",
     "fields": [
       {

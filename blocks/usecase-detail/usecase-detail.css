@@ -1,0 +1,306 @@
+/**
+ * Usecase Detail - 導入事例詳細ページスタイル
+ * biz.kddi.com/usecase/case_314/ に準じたレイアウト
+ */
+
+.usecase-detail {
+  --usecase-max: 1200px;
+  --usecase-gap: 24px;
+  --usecase-color-text: #333;
+  --usecase-color-muted: #555;
+  --usecase-color-border: #e0e0e0;
+  --usecase-color-accent: #e60012;
+  margin: 0 auto;
+  max-width: var(--usecase-max);
+  padding: 0 20px var(--usecase-gap);
+  color: var(--usecase-color-text);
+  font-family: var(--body-font-family);
+}
+
+/* ----- Hero（会社名） ----- */
+.usecase-detail__hero {
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--usecase-color-border);
+}
+
+.usecase-detail__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* ----- 概要・導入サービス ----- */
+.usecase-detail__overview {
+  padding: var(--usecase-gap) 0;
+}
+
+.usecase-detail__overview-heading {
+  margin: 0 0 0.5em;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.usecase-detail__overview p {
+  margin: 0 0 1em;
+  line-height: 1.7;
+  color: var(--usecase-color-text);
+}
+
+.usecase-detail__services {
+  list-style: none;
+  margin: 0.75em 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1em;
+}
+
+.usecase-detail__services li {
+  margin: 0;
+}
+
+.usecase-detail__services a {
+  color: var(--usecase-color-accent);
+  text-decoration: none;
+}
+
+.usecase-detail__services a:hover {
+  text-decoration: underline;
+}
+
+/* ----- 会社情報 + PDF CTA ----- */
+.usecase-detail__company-cta {
+  padding: var(--usecase-gap) 0;
+  border-top: 1px solid var(--usecase-color-border);
+}
+
+.usecase-detail__company-info {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem 1.5rem;
+  max-width: 560px;
+}
+
+.usecase-detail__company-info dt,
+.usecase-detail__company-info dd {
+  margin: 0;
+}
+
+.usecase-detail__company-info dt {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--usecase-color-muted);
+}
+
+.usecase-detail__company-info dd {
+  font-size: 0.9375rem;
+}
+
+.usecase-detail__company-info a {
+  color: var(--usecase-color-accent);
+  text-decoration: none;
+}
+
+.usecase-detail__company-info a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 600px) {
+  .usecase-detail__company-info {
+    grid-template-columns: auto 1fr;
+  }
+
+  .usecase-detail__company-info dt {
+    grid-column: 1;
+  }
+
+  .usecase-detail__company-info dd {
+    grid-column: 2;
+  }
+}
+
+.usecase-detail__download-cta {
+  margin-top: 1rem;
+}
+
+.usecase-detail__download-cta .button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.usecase-detail__download-cta .button:hover {
+  opacity: 0.9;
+}
+
+/* ----- お客さまインタビュー ----- */
+.usecase-detail__interview {
+  padding: 2rem 0;
+  border-top: 1px solid var(--usecase-color-border);
+}
+
+.usecase-detail__interview-heading {
+  margin: 2rem 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.usecase-detail__interview-heading:first-child {
+  margin-top: 0;
+}
+
+.usecase-detail__interview-subheading {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.usecase-detail__interview p {
+  margin: 0 0 1em;
+  line-height: 1.8;
+  color: var(--usecase-color-text);
+}
+
+.usecase-detail__interview figure {
+  margin: 1.5rem 0;
+}
+
+.usecase-detail__interview img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.usecase-detail__interview ul:not(.usecase-detail__services) {
+  margin: 0.5em 0 1em;
+  padding-left: 1.25em;
+  line-height: 1.7;
+}
+
+.usecase-detail__interview hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--usecase-color-border);
+}
+
+/* ----- 担当からのメッセージ ----- */
+.usecase-detail__message {
+  padding: 2rem 0;
+  background: #f8f8f8;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.usecase-detail__message .usecase-detail__message-name {
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  font-size: 0.9375rem;
+  color: var(--usecase-color-muted);
+}
+
+.usecase-detail__message .usecase-detail__message-body {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.usecase-detail__message-inner {
+  max-width: var(--usecase-max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (width >= 900px) {
+  .usecase-detail__message {
+    margin: 0 calc(-50vw + 50%);
+    padding-left: max(20px, calc(50vw - var(--usecase-max) / 2));
+    padding-right: max(20px, calc(50vw - var(--usecase-max) / 2));
+  }
+}
+
+/* ----- 関連サービス ----- */
+.usecase-detail__related {
+  padding: 2rem 0;
+}
+
+.usecase-detail__related h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.usecase-detail__related--grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.usecase-detail__related-link {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--usecase-color-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--usecase-color-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.usecase-detail__related-link:hover {
+  border-color: var(--usecase-color-accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ----- お問い合わせ・事例DL CTA ----- */
+.usecase-detail__cta {
+  padding: 2rem 0;
+  border-top: 1px solid var(--usecase-color-border);
+}
+
+.usecase-detail__cta p {
+  margin: 0 0 1rem;
+  line-height: 1.6;
+  color: var(--usecase-color-muted);
+}
+
+.usecase-detail__cta .button {
+  display: inline-block;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.usecase-detail__cta .button:hover {
+  opacity: 0.9;
+}
+
+/* ----- 同じサービスの導入事例 ----- */
+.usecase-detail__same-cases {
+  padding: 2rem 0 0;
+}
+
+.usecase-detail__same-cases h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* section container (EDS) */
+.usecase-detail-container {
+  background: var(--background-color);
+}
+
+.usecase-detail-wrapper {
+  max-width: 100%;
+}
