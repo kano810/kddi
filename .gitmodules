@@ -1,0 +1,3 @@
+[submodule "libs/aem-block-collection"]
+	path = libs/aem-block-collection
+	url = https://github.com/adobe/aem-block-collection.git

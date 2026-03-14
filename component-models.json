@@ -142,6 +142,10 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": []
+  },
+  {
     "id": "article-cf-list",
     "fields": [
       {
@@ -236,6 +240,10 @@
     ]
   },
   {
+    "id": "carousel",
+    "fields": []
+  },
+  {
     "id": "cf",
     "fields": [
       {
@@ -263,6 +271,14 @@
         "label": "Rows"
       }
     ]
+  },
+  {
+    "id": "embed",
+    "fields": []
+  },
+  {
+    "id": "form",
+    "fields": []
   },
   {
     "id": "fragment",
@@ -301,6 +317,26 @@
     ]
   },
   {
+    "id": "modal",
+    "fields": []
+  },
+  {
+    "id": "quote",
+    "fields": []
+  },
+  {
+    "id": "search",
+    "fields": []
+  },
+  {
+    "id": "table",
+    "fields": []
+  },
+  {
+    "id": "tabs",
+    "fields": []
+  },
+  {
     "id": "usecase-detail",
     "fields": [
       {
@@ -310,6 +346,10 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "video",
+    "fields": []
   },
   {
     "id": "youtube",

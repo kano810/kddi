@@ -255,6 +255,19 @@ function readBlockConfig(block) {
  * Loads a CSS file.
  * @param {string} href URL to the CSS file
  */
+/** EDS Block Collection: この名前のブロックは libs/aem-block-collection/blocks から読み込む */
+const BLOCK_COLLECTION_BLOCKS = [
+  'accordion', 'carousel', 'embed', 'form', 'modal', 'quote', 'search', 'table', 'tabs', 'video',
+];
+
+function getBlockBasePath(blockName) {
+  const base = window.hlx?.codeBasePath ?? '';
+  if (BLOCK_COLLECTION_BLOCKS.includes(blockName)) {
+    return `${base}libs/aem-block-collection/blocks/${blockName}`;
+  }
+  return `${base}blocks/${blockName}`;
+}
+
 async function loadCSS(href) {
   return new Promise((resolve, reject) => {
     if (!document.querySelector(`head > link[href="${href}"]`)) {
@@ -576,13 +589,14 @@ async function loadBlock(block) {
   if (status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
     const { blockName } = block.dataset;
+    const blockBase = getBlockBasePath(blockName);
     try {
-      const cssLoaded = loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`);
+      const cssLoaded = loadCSS(`${blockBase}/${blockName}.css`);
       const decorationComplete = new Promise((resolve) => {
         (async () => {
           try {
             const mod = await import(
-              `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
+              `${blockBase}/${blockName}.js`
             );
             if (mod.default) {
               await mod.default(block);

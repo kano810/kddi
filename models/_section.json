@@ -54,7 +54,17 @@
         "youtube",
         "cf",
         "article-cf-list",
-        "usecase-detail"
+        "usecase-detail",
+        "accordion",
+        "carousel",
+        "embed",
+        "form",
+        "modal",
+        "quote",
+        "search",
+        "table",
+        "tabs",
+        "video"
       ]
     }
   ]
