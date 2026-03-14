@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+@import url('biz-theme.css');
+
 :root {
   /* colors */
   --background-color: white;
@@ -112,6 +114,89 @@ h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
+
+/* デフォルトブロック（タイトル・テキスト）に KDDI BIZ テーマを適用 */
+main .section .default-content-wrapper h1,
+main .section .default-content-wrapper h2,
+main .section .default-content-wrapper h3,
+main .section .default-content-wrapper h4,
+main .section .default-content-wrapper h5,
+main .section .default-content-wrapper h6,
+main .section .title h1,
+main .section .title h2,
+main .section .title h3,
+main .section .title h4,
+main .section .title h5,
+main .section .title h6,
+main .section .text h1,
+main .section .text h2,
+main .section .text h3,
+main .section .text h4,
+main .section .text h5,
+main .section .text h6 {
+  font-family: var(--biz-font-family);
+  font-weight: var(--biz-font-weight-semi);
+  color: var(--biz-color-kddi-blue);
+  line-height: 1.6;
+}
+
+main .section .default-content-wrapper h1,
+main .section .title h1,
+main .section .text h1 { font-size: 2rem; }
+main .section .default-content-wrapper h2,
+main .section .title h2,
+main .section .text h2 { font-size: 1.75rem; }
+main .section .default-content-wrapper h3,
+main .section .title h3,
+main .section .text h3 { font-size: 1.5rem; }
+main .section .default-content-wrapper h4,
+main .section .title h4,
+main .section .text h4 { font-size: 1.25rem; }
+main .section .default-content-wrapper h5,
+main .section .title h5,
+main .section .text h5 { font-size: 1.125rem; }
+main .section .default-content-wrapper h6,
+main .section .title h6,
+main .section .text h6 { font-size: 1rem; }
+
+@media (width >= 768px) {
+  main .section .default-content-wrapper h1,
+  main .section .title h1,
+  main .section .text h1 { font-size: 2.25rem; }
+  main .section .default-content-wrapper h2,
+  main .section .title h2,
+  main .section .text h2 { font-size: 2rem; }
+  main .section .default-content-wrapper h3,
+  main .section .title h3,
+  main .section .text h3 { font-size: 1.75rem; }
+  main .section .default-content-wrapper h4,
+  main .section .title h4,
+  main .section .text h4 { font-size: 1.375rem; }
+}
+
+main .section .default-content-wrapper p,
+main .section .default-content-wrapper li,
+main .section .default-content-wrapper dd,
+main .section .default-content-wrapper blockquote,
+main .section .text p,
+main .section .text li,
+main .section .text dd,
+main .section .text blockquote {
+  font-family: var(--biz-font-family);
+  font-size: var(--biz-font-size-base);
+  line-height: var(--biz-line-height-base);
+  color: var(--biz-color-gray-1);
+}
+
+main .section .default-content-wrapper a:any-link,
+main .section .text a:any-link {
+  color: var(--biz-color-blue-link);
+}
+
+main .section .default-content-wrapper a:hover,
+main .section .text a:hover {
+  color: var(--biz-color-kddi-blue);
+}
 
 p,
 dl,

@@ -1,0 +1,50 @@
+/**
+ * KDDI BIZ テーマ（biz-aem のスタイルをブロックに適用）
+ * clientlib-site/less/variables.less, clientlib-bpsp より
+ */
+
+:root {
+  /* KDDI BIZ colors */
+  --biz-color-kddi-blue: #0e0d6a;
+  --biz-color-kddi-blue-deep: #001397;
+  --biz-color-blue-light: #0599e6;
+  --biz-color-blue-link: #0184c8;
+  --biz-color-blue-link-deep: #026ea8;
+  --biz-color-red: #c50018;
+  --biz-color-red-alt: #cf2020;
+
+  --biz-color-gray-1: #222;
+  --biz-color-gray-2: #626262;
+  --biz-color-gray-3: #757575;
+  --biz-color-gray-4: #7b848b;
+  --biz-color-gray-5: #8d9295;
+  --biz-color-gray-6: #aaafb3;
+  --biz-color-gray-7: #d7dbde;
+  --biz-color-gray-8: #e7e9eb;
+  --biz-color-gray-9: #e8e8e9;
+  --biz-color-gray-10: #f0f3f3;
+  --biz-color-gray-11: #c9ccd3;
+
+  --biz-color-bg-tag: #e8f1ff;
+  --biz-color-white: #fff;
+
+  /* Layout (biz-aem) */
+  --biz-content-width: 1200px;
+  --biz-content-width-small: 1000px;
+  --biz-gutter-pc: 20px;
+  --biz-gutter-sp: 5%;
+  --biz-breakpoint-sm: 480px;
+  --biz-breakpoint-md: 768px;
+  --biz-breakpoint-lg: 1080px;
+  --biz-breakpoint-xl: 1280px;
+
+  /* Typography */
+  --biz-font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+  --biz-font-size-base: 15px;
+  --biz-font-size-small: 12px;
+  --biz-font-size-xsmall: 11px;
+  --biz-line-height-base: 1.6;
+  --biz-font-weight-normal: 400;
+  --biz-font-weight-semi: 600;
+  --biz-font-weight-bold: 700;
+}

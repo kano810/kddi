@@ -1,17 +1,20 @@
 /**
- * Article CF List - EDS Block styles
+ * Article CF List - EDS Block styles（biz-aem テーマ適用）
  * 記事APIで取得したCF（コンテンツフラグメント）一覧の表示用
  */
 
 .article-cf-list {
   padding: 1rem 0;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: var(--biz-content-width, 1200px);
+  font-family: var(--biz-font-family);
 }
 
 .article-cf-list__heading {
   margin: 0 0 1rem;
   font-size: 1.5rem;
+  font-weight: var(--biz-font-weight-semi);
+  color: var(--biz-color-kddi-blue);
 }
 
 .article-cf-list__container {
@@ -23,14 +26,14 @@
 .article-cf-list__empty {
   padding: 1.5rem;
   text-align: center;
-  color: #555;
+  color: var(--biz-color-gray-5);
 }
 
 .article-cf-list__error {
-  color: #c00;
+  color: var(--biz-color-red);
 }
 
-/* Cards layout */
+/* Cards layout（biz .cmp-relatedArticle / .html-cardItem に準拠） */
 .article-cf-list__cards {
   list-style: none;
   margin: 0;
@@ -43,19 +46,22 @@
 .article-cf-list__card {
   margin: 0;
   padding: 0;
-  background: #fff;
-  border-radius: 8px;
+  background: var(--biz-color-white);
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s;
+  border: 1px solid var(--biz-color-gray-7);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .article-cf-list__card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-color: var(--biz-color-blue-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .article-cf-list__card-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -63,7 +69,8 @@
 .article-cf-list__card-figure {
   margin: 0;
   aspect-ratio: 16 / 9;
-  background: #f0f0f0;
+  background: var(--biz-color-gray-10);
+  overflow: hidden;
 }
 
 .article-cf-list__card-image {
@@ -71,31 +78,42 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+}
+
+.article-cf-list__card-link:hover .article-cf-list__card-image {
+  transform: scale(1.06);
+  filter: brightness(1.04);
 }
 
 .article-cf-list__card-body {
-  padding: 1rem;
+  padding: 8% 6%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .article-cf-list__card-date {
   display: block;
-  font-size: 0.875rem;
-  color: #666;
-  margin-bottom: 0.25rem;
+  font-size: var(--biz-font-size-small);
+  color: var(--biz-color-gray-5);
+  line-height: 1.4;
 }
 
 .article-cf-list__card-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.0625rem;
-  font-weight: 600;
+  margin: 0 0 0.25rem;
+  font-size: var(--biz-font-size-base);
+  font-weight: var(--biz-font-weight-normal);
   line-height: 1.4;
+  color: var(--biz-color-gray-1);
 }
 
 .article-cf-list__card-description {
   margin: 0 0 0.5rem;
   font-size: 0.875rem;
-  color: #555;
-  line-height: 1.5;
+  color: var(--biz-color-gray-5);
+  line-height: var(--biz-line-height-base);
 }
 
 .article-cf-list__card-tags {
@@ -108,11 +126,13 @@
 }
 
 .article-cf-list__card-tag {
-  font-size: 0.75rem;
-  padding: 0.2em 0.5em;
-  background: #eee;
+  font-size: var(--biz-font-size-xsmall);
+  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid var(--biz-color-blue-link);
   border-radius: 4px;
-  color: #444;
+  color: var(--biz-color-blue-link);
+  font-weight: var(--biz-font-weight-semi);
 }
 
 /* List layout */
@@ -120,13 +140,13 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--biz-color-gray-7);
 }
 
 .article-cf-list__list-item {
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--biz-color-gray-7);
 }
 
 .article-cf-list__list-link {
@@ -140,16 +160,17 @@
 }
 
 .article-cf-list__list-link:hover {
-  background: #f8f8f8;
+  background: var(--biz-color-gray-10);
+  color: var(--biz-color-kddi-blue);
 }
 
 .article-cf-list__list-date {
   flex-shrink: 0;
   font-size: 0.875rem;
-  color: #666;
+  color: var(--biz-color-gray-5);
   min-width: 8rem;
 }
 
 .article-cf-list__list-title {
-  font-weight: 500;
+  font-weight: var(--biz-font-weight-normal);
 }
